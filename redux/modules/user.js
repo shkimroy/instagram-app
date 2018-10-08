@@ -7,6 +7,7 @@ import { Facebook } from "expo";
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const SET_USER = "SET_USER";
+const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 
 // Action Creators
 function setLogIn(token) {
@@ -27,6 +28,17 @@ function setUser(user) {
     type: SET_USER,
     user
   };
+}
+
+function logOut() {
+  return { type: LOG_OUT };
+}
+
+function setNotifications(notifications) {
+  return {
+    type: SET_NOTIFICATIONS,
+    notifications
+  }
 }
 
 // API Actions
@@ -85,6 +97,44 @@ function facebookLogin() {
   };
 }
 
+function getNotifications() {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    fetch(`${API_URL}/notifications/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+    .then(response => {
+      if (response.status === 401) {
+        dispatch(logOut());
+      } else {
+        return response.json();
+      }
+    })
+    .then(json => dispatch(setNotifications(json)));
+  };
+}
+
+function getOwnProfile() {
+  return (dispatch, getState) => {
+    const { user: { token, profile: { username } } } = getState();
+    fetch(`${API_URL}/users/${username}/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+    .then(response => {
+      if (response.status === 401) {
+        dispatch(logOut());
+      } else {
+        return response.json();
+      }
+    })
+    .then(json => dispatch(setUser(json)));
+  };
+}
+
 // Initial State
 const initialState = {
   isLoggedIn: false
@@ -100,6 +150,8 @@ function reducer(state = initialState, action) {
       return applyLogOut(state, action);
     case SET_USER:
       return applySetUser(state, action);
+    case SET_NOTIFICATIONS:
+      return applySetNotifications(state, action);
     default:
       return state;
   }
@@ -133,11 +185,22 @@ function applySetUser(state, action) {
   };
 }
 
+function applySetNotifications(state, action) {
+  const { notifications } = action;
+  return {
+    ...state,
+    notifications
+  }
+}
+
 // Export
 
 const actionCreators = {
   login,
-  facebookLogin
+  facebookLogin,
+  logOut,
+  getNotifications,
+  getOwnProfile
 };
 
 export { actionCreators };

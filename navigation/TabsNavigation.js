@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "react-navigation";
 import HomeRoute from "../routes/HomeRoute";
 import SearchRoute from "../routes/SearchRoute";
@@ -33,7 +34,7 @@ const TabsNavigation = createBottomTabNavigator(
       }
     },
     AddPhoto: {
-      screen: SearchRoute,
+      screen: View,
       navigationOptions: ({navigation}) => ({
         tabBarIcon: ({ focused }) => (
           <Ionicons

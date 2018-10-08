@@ -2,7 +2,8 @@ import { combineReducers, applyMiddleware, createStore } from "redux";
 import { persistStore, persistCombineReducers } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-import user from "./modules/user"
+import user from "./modules/user";
+import photos from "./modules/photos";;
 
 const middlewares = [thunk];
 
@@ -12,7 +13,8 @@ const persistConfig = {
 }
 
 const reducer = persistCombineReducers(persistConfig, {
-  user
+  user,
+  photos
 });
 
 const configureStore = () => {
