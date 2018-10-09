@@ -8,11 +8,11 @@ import {
   StyleSheet,
   Dimensions
 } from "react-native";
-import SquarePhoto from "../../components/SquarePhoto";
+import Notification from "../../components/Notification";
 
 const { width, height } = Dimensions.get("window");
 
-const SearchScreen = props => (
+const NotificationsScreen = props => (
   <ScrollView
     refreshControl={
       <RefreshControl
@@ -23,13 +23,13 @@ const SearchScreen = props => (
     }
   >
     <View style={styles.container}>
-      {props.search.length === 0 && props.searchingBy.length > 1 ? (
+      {props.notifications.length === 0 && props.notifications.length > 1 ? (
         <Text style={styles.notFound}>
-          No images found for {props.searchingBy}
+          No notifications yet! Come back soone!
         </Text>
       ) : (
-        props.search.map(photo => (
-          <SquarePhoto key={photo.id} imageURL={photo.file} />
+        props.notifications.map(notification => (
+          <Notification key={notification.id} {...notification} />
         ))
       )}
     </View>
@@ -39,8 +39,7 @@ const SearchScreen = props => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap"
+    backgroundColor: "white"
   },
   notFound: {
     color: "#bbb",
@@ -52,10 +51,10 @@ const styles = StyleSheet.create({
   }
 });
 
-SearchScreen.propTypes = {
+NotificationsScreen.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  search: PropTypes.array.isRequired
+  notifications: PropTypes.array.isRequired
 };
 
-export default SearchScreen;
+export default NotificationsScreen;

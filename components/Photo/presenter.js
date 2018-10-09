@@ -9,6 +9,7 @@ import {
   StyleSheet
 } from "react-native";
 import FadeIn from "react-native-fade-in-image";
+import FitImage from "react-native-fit-image";
 import PhotoActions from "../PhotoActions";
 import { withNavigation } from "react-navigation";
 
@@ -18,8 +19,8 @@ const Photo = props => (
   <View style={styles.photo}>
     <TouchableOpacity>
       <View style={styles.header}>
-        <FadeIn>
-          <Image
+        <View>
+          <FitImage
             source={
               props.creator.profile_image
                 ? {
@@ -29,7 +30,7 @@ const Photo = props => (
             }
             style={styles.avatar}
           />
-        </FadeIn>
+        </View>
         <View>
           <Text style={styles.author}>{props.creator.username}</Text>
           {props.location && (
@@ -38,12 +39,12 @@ const Photo = props => (
         </View>
       </View>
     </TouchableOpacity>
-    <FadeIn>
+    <View>
       <Image
         source={{ uri: props.file }}
         style={{ width, height: props.is_vertical ? 600 : 300 }}
       />
-    </FadeIn>
+    </View>
     <View style={styles.photoMeta}>
       <PhotoActions
         isLiked={props.isLiked}
