@@ -38,7 +38,7 @@ const TabsNavigation = createBottomTabNavigator(
       navigationOptions: ({navigation}) => ({
         tabBarIcon: ({ focused }) => (
           <Ionicons
-            name={focused ? "ios-search" : "ios-search-outline"}
+            name={"ios-add-circle-outline"}
             size={30}
             color={"black"}
           />

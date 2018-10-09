@@ -9,7 +9,7 @@ import AppContainer from "./components/AppContainer";
 
 const { persistor, store } = configureStore();
 
-store.dispatch({type: "LOG_OUT"});
+store.dispatch({ type: "LOG_OUT" });
 
 class App extends React.Component {
   state = {
@@ -44,7 +44,7 @@ class App extends React.Component {
         require("./assets/images/noPhoto.jpg"),
         require("./assets/images/photoPlaceholder.png")
       ]),
-      Font.loadAsync([...Ionicons.font, ...MaterialIcons.font])
+      Font.loadAsync({ ...Ionicons.font, ...MaterialIcons.font })
     ]);
   };
 
@@ -58,6 +58,5 @@ class App extends React.Component {
     });
   };
 }
-
 
 export default App;

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Photo from "../../components/Photo";
 
-const FeedScreen = props => (
+const SearchScreen = props => (
   <ScrollView
     refreshControl={
       <RefreshControl
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
   }
 });
 
-FeedScreen.propTypes = {
+SearchScreen.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  feed: PropTypes.array.isRequired
+  search: PropTypes.array.isRequired
 };
 
-export default FeedScreen;
+export default SearchScreen;
