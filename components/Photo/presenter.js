@@ -17,7 +17,12 @@ const { width, height } = Dimensions.get("window");
 
 const Photo = props => (
   <View style={styles.photo}>
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPressOut={() =>
+        props.navigation.navigate("ProfileDetail", {
+          user: props.creator
+        })}
+    >
       <View style={styles.header}>
         <View>
           <FitImage
