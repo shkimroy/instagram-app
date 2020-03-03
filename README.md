@@ -1,2 +1,2 @@
-# nomadgrapp
-Cloning IG app with React Native
+# Instagram App
+Cloning IG App with React Native
